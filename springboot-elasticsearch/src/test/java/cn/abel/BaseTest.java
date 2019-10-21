@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@TestPropertySource("/application.properties")
 public class BaseTest {
 
     @Configuration

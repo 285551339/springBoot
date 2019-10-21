@@ -14,12 +14,16 @@ public class ServiceTest extends BaseTest {
 
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Test
     public void dynamicDataSourceTest() throws Exception {
-        User user = userService.getById(1);
-        System.out.println("--userList---" + user.toString());
+        //User user = userService.selectById(1);
+        System.out.println("--userList---" );
+        User user = new User();
+        user.setId(1);
+        userService.addUser(user);
+        userService.getUserById("1");
 
     }
 }
