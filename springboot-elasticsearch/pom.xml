@@ -79,6 +79,13 @@
             <version>1.16.14</version>
             <scope>provided</scope>
         </dependency>
+        <!--ES spring boot-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+        <!--ES spring boot-->
 
         <!--ES start-->
         <dependency>
