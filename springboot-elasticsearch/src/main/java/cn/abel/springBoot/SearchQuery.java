@@ -1,3 +1,4 @@
+/*
 package cn.abel.springBoot;
 
 import org.elasticsearch.index.query.QueryBuilder;
@@ -29,3 +30,4 @@ public interface SearchQuery extends Query {
 
     List<ScriptField> getScriptFields();
 }
+*/

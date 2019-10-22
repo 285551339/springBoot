@@ -1,3 +1,4 @@
+/*
 package cn.abel.springBoot;
 
 import org.elasticsearch.action.search.SearchType;
@@ -18,13 +19,15 @@ import java.util.List;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
+*/
 /**
 * @Description: 重写了spring-data-elasticsearch的NativeSearchQueryBuilder
 * @Author: zc
 * @CreateDate: 2019/5/8 15:06
 * @Remark:
 * @Version: 1.0
-*/
+*//*
+
 public class NativeSearchQueryBuilder {
 
     private QueryBuilder queryBuilder;
@@ -76,10 +79,12 @@ public class NativeSearchQueryBuilder {
         return this;
     }
 
-    /*public NativeSearchQueryBuilder withHighlightFields(HighlightBuilder.Field... highlightFields) {
+    */
+/*public NativeSearchQueryBuilder withHighlightFields(HighlightBuilder.Field... highlightFields) {
         this.highlightFields = highlightFields;
         return this;
-    }*/
+    }*//*
+
 
     public NativeSearchQueryBuilder withIndicesBoost(List<IndexBoost> indicesBoost) {
         this.indicesBoost = indicesBoost;
@@ -136,7 +141,8 @@ public class NativeSearchQueryBuilder {
         return this;
     }
 
-   /* public NativeSearchQuery build() {
+   */
+/* public NativeSearchQuery build() {
         NativeSearchQuery nativeSearchQuery = new NativeSearchQuery(queryBuilder, filterBuilder, sortBuilders, highlightFields);
         if (pageable != null) {
             nativeSearchQuery.setPageable(pageable);
@@ -195,5 +201,7 @@ public class NativeSearchQueryBuilder {
         }
 
         return nativeSearchQuery;
-    }*/
+    }*//*
+
 }
+*/

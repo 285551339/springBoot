@@ -4,12 +4,14 @@ import cn.abel.bean.User;
 import cn.abel.mapper.UserMapper;
 import cn.abel.service.IUserService;
 import cn.abel.util.ElasticsearchUtil;
+import cn.abel.vo.EsEntity;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.IdsQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -17,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
@@ -48,10 +52,48 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User getUserById(String id) {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        MatchAllQueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
+        IdsQueryBuilder queryBuilder = QueryBuilders.idsQuery();
         searchSourceBuilder.query(queryBuilder);
         List<User> user = ElasticsearchUtil.search("user", searchSourceBuilder, User.class);
         System.out.println(JSONObject.toJSONString(user));
         return null;
+    }
+
+    @Override
+    public void inserbacthUser(List<User> list) {
+        ArrayList<EsEntity> lists = new ArrayList();
+        for (User u: list) {
+            EsEntity<User> esEntity = new EsEntity<>();
+
+            esEntity.setData(u);
+            esEntity.setId(String.valueOf(u.getId()));
+            lists.add(esEntity);
+        }
+        ElasticsearchUtil.insertBatch("user",lists);
+    }
+
+    public  String getRandomString2(int length){
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(3);
+            long result=0;
+            switch(number){
+                case 0:
+                    result=Math.round(Math.random()*25+65);
+                    sb.append(String.valueOf((char)result));
+                    break;
+                case 1:
+                    result=Math.round(Math.random()*25+97);
+                    sb.append(String.valueOf((char)result));
+                    break;
+                case 2:
+                    sb.append(String.valueOf(new Random().nextInt(10)));
+                    break;
+            }
+
+
+        }
+        return sb.toString();
     }
 }

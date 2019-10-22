@@ -169,7 +169,7 @@ public class ElasticsearchUtil {
      * @return
      * @auther: LHL
      */
-    public void insertBatch(String index, List<EsEntity> list) {
+    public static void insertBatch(String index, List<EsEntity> list) {
         BulkRequest request = new BulkRequest();
         list.forEach(item -> request.add(new IndexRequest(index).id(item.getId())
                 .source(JSON.toJSONString(item.getData()), XContentType.JSON)));
@@ -188,7 +188,7 @@ public class ElasticsearchUtil {
      * @return
      * @auther: LHL
      */
-    public void deleteByQuery(String indexName, QueryBuilder builder) {
+    public static void deleteByQuery(String indexName, QueryBuilder builder) {
         DeleteByQueryRequest request = new DeleteByQueryRequest(indexName);
         request.setQuery(builder);
         //设置批量操作数量,最大为10000
