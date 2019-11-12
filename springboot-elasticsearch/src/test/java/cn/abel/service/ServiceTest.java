@@ -3,6 +3,7 @@ package cn.abel.service;
 import cn.abel.BaseTest;
 import cn.abel.bean.User;
 import cn.abel.util.ElasticsearchUtil;
+import cn.abel.util.RedisUtil;
 import cn.abel.vo.EsEntity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ServiceTest extends BaseTest {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Test
     public void dynamicDataSourceTest() throws Exception {
@@ -35,7 +38,9 @@ public class ServiceTest extends BaseTest {
         userService.inserbacthUser(list);*/
 
         //userService.addUser(user);
-        userService.getUserById("1");
+        // userService.getUserById("1");
+        redisUtil.set("cesi","1111111111111111");
+
 
     }
 

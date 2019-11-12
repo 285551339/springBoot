@@ -5,15 +5,16 @@ import cn.abel.mapper.UserMapper;
 import cn.abel.service.IUserService;
 import cn.abel.util.ElasticsearchUtil;
 import cn.abel.vo.EsEntity;
+import cn.abel.vo.EsPage;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.lucene.search.Query;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.common.io.stream.StreamOutput;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.index.query.IdsQueryBuilder;
-import org.elasticsearch.index.query.MatchAllQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +53,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User getUserById(String id) {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        IdsQueryBuilder queryBuilder = QueryBuilders.idsQuery();
-        searchSourceBuilder.query(queryBuilder);
-        List<User> user = ElasticsearchUtil.search("user", searchSourceBuilder, User.class);
+        MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();
+        searchSourceBuilder.query(matchAllQueryBuilder);
+
+       List<User> user = ElasticsearchUtil.search("user", searchSourceBuilder, User.class);
+        //EsPage user = ElasticsearchUtil.searchDataPage("user", 1, 100, query, null, null, null);
         System.out.println(JSONObject.toJSONString(user));
         return null;
     }

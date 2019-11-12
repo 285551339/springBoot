@@ -23,6 +23,11 @@ spring:
             testOnReturn: false
             poolPreparedStatements: true
             maxOpenPreparedStatements: 20
+  redis:
+    database: ${REDIS_DATABASE:0}
+    host: ${REDIS_HOST:10.0.0.251}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
 
 server:
     port: ${SERVER_PORT:8888} #启动端口

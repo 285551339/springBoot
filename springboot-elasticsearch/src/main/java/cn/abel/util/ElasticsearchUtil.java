@@ -303,7 +303,7 @@ public class ElasticsearchUtil {
                     //设置size确定要返回的搜索匹配数的选项。默认为10
                     .size(pageSize);
             //打印的内容 可以在 Elasticsearch head 和 Kibana  上执行查询
-            LOGGER.info("\n{}", searchSourceBuilder);
+           // LOGGER.info("{}", searchSourceBuilder);
             // 执行搜索,返回搜索响应信息
             searchRequest.source(searchSourceBuilder);
             SearchResponse searchResponse = null;
